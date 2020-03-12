@@ -42,6 +42,7 @@ class Solution(object):
                     dp[i][j] = first_match and dp[i+1][j+1]
 
         return dp[0][0]
+    
     def test1(self, 
         text : "被匹配数", 
         pattern:"匹配因子"):
