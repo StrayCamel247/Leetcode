@@ -75,7 +75,7 @@ class Solution:
         return {
             1 : lambda nums,target : self.force(nums,target),
             2 : lambda nums,target : self.hash_map(nums,target),
-        }[1](nums,target)
+        }[2](nums,target)
 
 # @lc code=end
 

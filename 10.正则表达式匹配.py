@@ -31,7 +31,6 @@ p = "a*"
 class Solution(object):
     def test(self, text, pattern):
         dp = [[False] * (len(pattern) + 1) for _ in range(len(text) + 1)]
-
         dp[-1][-1] = True
         for i in range(len(text), -1, -1):
             for j in range(len(pattern) - 1, -1, -1):

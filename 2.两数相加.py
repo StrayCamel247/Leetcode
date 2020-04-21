@@ -18,32 +18,29 @@
 '''
 # @lc code=start
 # Definition for singly-linked list.
-class ListNode():
-    def __init__(self, val):
-        if isinstance(val,int):
-            self.val = val
-            self.next = None
+# class ListNode():
+#     def __init__(self, val):
+#         if isinstance(val,int):
+#             self.val = val
+#             self.next = None
             
-        elif isinstance(val,list):
-            self.val = val[0]
-            self.next = None
-            cur = self
-            for i in val[1:]:
-                cur.next = ListNode(i)
-                cur = cur.next
+#         elif isinstance(val,list):
+#             self.val = val[0]
+#             self.next = None
+#             cur = self
+#             for i in val[1:]:
+#                 cur.next = ListNode(i)
+#                 cur = cur.next
     
-    def gatherAttrs(self):
-        return ", ".join("{}: {}".format(k, getattr(self, k)) for k in self.__dict__.keys())
+#     def gatherAttrs(self):
+#         return ", ".join("{}: {}".format(k, getattr(self, k)) for k in self.__dict__.keys())
 
-    def __str__(self):
-            return self.__class__.__name__+" {"+"{}".format(self.gatherAttrs())+"}"
+#     def __str__(self):
+#             return self.__class__.__name__+" {"+"{}".format(self.gatherAttrs())+"}"
 
 
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        if isinstance(l1,list):
-            l1 = ListNode(l1)
-            l2 = ListNode(l2)
         re = ListNode(0)
         r=re
         carry=0
@@ -59,10 +56,7 @@ class Solution:
         if(carry>0):
             r.next=ListNode(1)
         return re.next
-          
-        
-        
 # @lc code=end
 if __name__ == "__main__":
     test = Solution()
-    print(test.addTwoNumbers([1,3],[2,1,3]))
+    print(test.addTwoNumbers(ListNode([2,4,3]),ListNode([5,6,4])))

@@ -31,6 +31,7 @@ class Solution:
             return s
         # 将一个可能是偶数长/奇数长的字符串，首位以及每个字符间添加#
         test = '#'+'#'.join(s)+'#'
+        print(test)
         # 当前遍历的中心最大扩散步数，其值等于原始字符串的最长回文子串的长度
         max_len = 0
         for i in range(len(test)):
@@ -39,11 +40,11 @@ class Solution:
             step = 0
             print(test[i])
             while left >= 0 and right < len(test) and test[left] == test[right]:
-                # print("spread",test[left],test[right])
+                print("spread",test[left],test[right])
                 left -= 1
                 right += 1
                 step += 1
-                # print(step)
+                print(step)
             
             if step > max_len:
                 max_len = step
@@ -69,6 +70,7 @@ class Solution:
         '''
         
         if s==s[::-1]:
+            print(s)
             return s
         res = s[:1]
         for i in range(len(s)):
@@ -106,6 +108,6 @@ class Solution:
 # @lc code=end
 if __name__ == "__main__":
     test = Solution()
-    print(test.longestPalindrome("aba"))
-    test= "test"
-    print('#'+'#'.join(test)+'#')
+    print(test.longestPalindrome("abab"))
+    # test= "test"
+    # print('#'+'#'.join(test)+'#')

@@ -13,6 +13,22 @@ class Solution:
             ['C','D','M'],
             ['M'],
         ]
+        
+        self.other_G = [
+            ['', 'M', 'MM', 'MMM'],
+            ['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'],
+            ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'],
+            ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX']
+        ]
+
+    def other(self, num:int) -> str:
+        d = [1000, 100, 10, 1]
+        r = ''
+        for k, v in enumerate(d):
+            r += self.other_G[k][int(num/v)]
+            num = num % v
+        return r
+
     def viaDict(self, num:int) -> str:
         resl,nlist=[],list(str(num))
         for k,v in enumerate(self.Glossary):
@@ -32,10 +48,12 @@ class Solution:
                 # 遇到StopIteration就退出循环
                 break
         return "".join(resl)
+
     def intToRoman(self, num: int) -> str:
         return {
             1:lambda num:self.viaDict(num),
-        }[1](num)
+            2:lambda num:self.other(num),
+        }[2](num)
 # @lc code=end
 
 if __name__ == "__main__":

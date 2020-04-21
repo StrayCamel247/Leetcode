@@ -67,13 +67,18 @@ class Solution:
             # 将j滑过的字符存入dic
             dic[s[j]] = j+1
         return res
+        
     def test(self, s:str) -> int:
-        length,j = 0,-1
-        for i,x in enumerate(s):
+        length, j = 0, -1
+        for i, x in enumerate(s):
             if x in s[j+1:i]:
-                length = max(length,i-j-1)
-                j = s[j+1:i].index(x)+j+1
-        return max(length,len(s)-1-j)
+                # 计算中间无重复的时候有多少位数
+                length = max(length, i-j-1)
+                # 发现重复了 左边界j改变,向右移动s[j+1:i].index(x)+1位，
+                print(j, s[j+1:i].index(x))
+                j += s[j+1:i].index(x)+1
+                
+        return max(length, len(s)-1-j)
         
     def lengthOfLongestSubstring(self, s: str) -> int:
         return {
@@ -84,11 +89,10 @@ class Solution:
 
     
 # @lc code=end
-
 if __name__ == "__main__":
-    pass
-    # test = Solution()
-    # print(test.lengthOfLongestSubstring("9999"))
+    # pass
+    test = Solution()
+    print(test.lengthOfLongestSubstring("pwwkew"))
     # if test.check_str("godk"):
     #     print("s")
     # else:
