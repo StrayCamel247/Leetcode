@@ -1,0 +1,12 @@
+test.py
+.idea/
+.ipynb_checkpoints/
+.vscode/
+logs/*.log
+# python缓存文件
+**/__pycache__
+uploads/
+# 我也不知道是啥的文件
+**/.DS_Store
+# 压缩文件
+**/.zip
