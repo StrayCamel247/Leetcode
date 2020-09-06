@@ -56,9 +56,7 @@
 #
 
 # @lc code=start
-#  DP动态规划
 from typing import List
-import numpy as np
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         if not prices:

@@ -45,7 +45,6 @@ class Solution:
                     idx -= 1
                     break
             nums[p],nums[idx]=nums[idx],nums[p]
-            #print(nums)
             lst = sorted(nums[p+1:])     
 
             for i in range(len(lst)):
