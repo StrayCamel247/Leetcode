@@ -81,6 +81,10 @@ class Solution:
         while queue:
             size = len(queue)
             stock = []
+            # print(queue)
+            # stock = [queue.pop(_).val for _ in range(size) if queue[_]]
+            # print(queue)
+            # queue.extend([queue.pop(_).left for _ in range(size) if queue[_]])
             for _ in range(size):
                 cur = queue.pop(0)
                 if not cur:
