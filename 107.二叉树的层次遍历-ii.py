@@ -12,7 +12,7 @@
 #         self.left = None
 #         self.right = None
 
-
+import functools
 from typing import List
 class Solution:
     def __init__(self):
@@ -42,13 +42,13 @@ class Solution:
             dep += 1
             cur = cur.right
         return [self.res[_] for _ in sorted(self.res.keys(), reverse=True)]
-
+    @functools.lru_cache(None)
     def dfs(self, root: TreeNode, dep:int=0):
-        # 递归对二叉树进行dfs，牺牲了内存，这在项目里使用估计要被boss骂死，机器得爆掉
+        # 递归对二叉树进行dfs，牺牲了内存，机器得爆掉
         # Accepted
-        #     34/34 cases passed (44 ms)
-        #     Your runtime beats 64.23 % of python3 submissions
-        #     Your memory usage beats 5.07 % of python3 submissions (14.6 MB)
+        #   34/34 cases passed (40 ms)
+        #   Your runtime beats 84.37 % of python3 submissions
+        #   Your memory usage beats 5.09 % of python3 submissions (14.7 MB)MB)
         if not root:return []
         self.res[dep] = self.res.get(dep, []) +[root.val]
         dep +=1
@@ -100,7 +100,7 @@ class Solution:
             1: lambda root:(self.dfs(root), [self.res[_] for _ in reversed(self.res.keys())])[1],
             2: lambda root:self.iterative(root),
             3: lambda root:self.queue(root)
-        }[3](root)
+        }[1](root)
 # @lc code=end
 # if __name__ == "__main__":
 #     test = Solution()
