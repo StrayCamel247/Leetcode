@@ -41,10 +41,30 @@ class Solution:
             stack = tmp
             self.res.append(_res)
         return self.res
-            
+    
+    def queue(self, root):
+        # 队列
+        import collections
+        queue = collections.deque()
+        queue.append(root)
+        res = []
+        while queue:
+            size = len(queue)
+            level = []
+            for _ in range(size):
+                cur = queue.popleft()
+                if not cur:
+                    continue
+                level.append(cur.val)
+                queue.append(cur.left)
+                queue.append(cur.right)
+            if level:
+                res.append(level)
+        return res
+
         
         
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
-        return self.brute(root)
+        return self.queue(root)
 # @lc code=end
 
