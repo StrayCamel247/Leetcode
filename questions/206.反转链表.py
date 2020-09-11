@@ -50,14 +50,34 @@ class ListNode():
 
     def __str__(self):
             return self.__class__.__name__+" {"+"{}".format(self.gatherAttrs())+"}"
-
+from functools import lru_cache
 class Solution:
-    def reverseList(self, head: ListNode) -> ListNode:
+    def iteration(self, head: ListNode):
         # 迭代！！
         p, rev = head, None
         while p:
-            rev, rev.next, p = p, rev, p.next
+            # rev, rev.next, p = p, rev, p.next
+            rev = p
+            rev.next = rev
+            p = p.next
         return rev
+    def tree(self, head):
+        while head:
+            print(head.val)
+            head = head.next
+            
+    def recursion(self, head:ListNode):
+        if not head or not head.next:
+            return head
+        rev = self.recursion(head.next)
+        self.tree(head)
+        head.next.next = head
+        head.next = None
+        return rev
+
+    def reverseList(self, head: ListNode) -> ListNode:
+        # 迭代！！
+        return self.recursion     (head)
 
 # @lc code=end
 if __name__ == "__main__":
