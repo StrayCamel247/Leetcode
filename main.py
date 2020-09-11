@@ -17,10 +17,19 @@ _listdir.sort()
 def _search(name):
     for _ in _listdir:
         if name in _:
-            logging.info(os.path.join(questions_floder, _))
+            # logging.info(os.path.join(questions_floder, _))
+            logging.info(questions_floder+'/'+_)
             break
     return _
 
 
 if __name__ == "__main__":
-    _search('反转字符串')
+    # _search('杨辉三角')
+    def test(k):
+        tmp = k
+        res = [0 for _ in range(5)]
+        res2 = [str(_)+tmp for _ in res]
+
+
+    # print(res, res2)
+    test(01)
