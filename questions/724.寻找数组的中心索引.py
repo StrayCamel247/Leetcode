@@ -53,5 +53,13 @@
 # @lc code=start
 class Solution:
     def pivotIndex(self, nums: List[int]) -> int:
+        l_sum,r_sum = 0,sum(nums)
+        for i,item in enumerate(nums):
+            r_sum -= item
+            if l_sum == r_sum:
+                return i
+            l_sum += item
+        
+        return -1
 # @lc code=end
 

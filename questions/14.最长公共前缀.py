@@ -39,15 +39,22 @@ from typing import List
 # @lc code=start
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
-        if len(strs) == 0:
-            return ''
-        flag = min(strs)
-        strs.remove(flag)
-        for _ in strs:
-            while _.find(flag) != 0 :
-                flag = flag[:-1]
+        if not strs:return ''
+        _ = min(strs, key=len) 
+        strs.remove(_)
+        for s in strs:
+            while s.find(_)!=0:
+                _ = _[:-1]
+        return _
         
-        return flag
+        # 找公共字符串可以用zip法if not strs:return ''
+        # res = ''
+        # for x in zip(*strs):
+        #     if len(set(x)) == 1:
+        #         res+=x[0]
+        #     else:
+        #         break
+        # return res
         
 # @lc code=end
 if __name__ == "__main__":
