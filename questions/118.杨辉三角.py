@@ -6,11 +6,28 @@
 from typing import List
 from math import factorial
 # @lc code=start
+
+
 class Solution:
+    def recursion(self, numRows: int) -> List[List[int]]:
+
+        if numRows == 0:
+            return []
+        if numRows == 1:
+            return [[1]]
+        a = self.generate(numRows-1)
+        a.append([1]+[a[-1][i-1] + a[-1][i] for i in range(1, numRows-1)]+[1])
+        return a
+
+    def formula(self, numRows: int) -> List[List[int]]:
+        def _(n, r): return factorial(n) // factorial(r) // factorial(n - r)
+        return [[_(n, r) for r in range(n + 1)] for n in range(numRows)]
+
     def generate(self, numRows: int) -> List[List[int]]:
 
-        _ = lambda n, r: factorial(n) // factorial(r) // factorial(n - r)
+        def _(n, r): return factorial(n) // factorial(r) // factorial(n - r)
         return [[_(n, r) for r in range(n + 1)] for n in range(numRows)]
+
 
         # iteration
         # if numRows == 0: return []
@@ -23,13 +40,15 @@ class Solution:
 if __name__ == "__main__":
     test = Solution()
     print(test.generate(5))
-    # [[1], 
-    # [1, 1], 
-    # [1, 2, 1], 
-    # [1, 3, 3, 1], 
+    # [[1],
+    # [1, 1],
+    # [1, 2, 1],
+    # [1, 3, 3, 1],
     # [1, 4, 6, 4, 1]]
-    def _(n,r):
-        print(n,r,':',factorial(n) , factorial(r) , factorial(n - r),factorial(n) // factorial(r) // factorial(n - r))
+
+    def _(n, r):
+        print(n, r, ':', factorial(n), factorial(r), factorial(
+            n - r), factorial(n) // factorial(r) // factorial(n - r))
         return factorial(n) // factorial(r) // factorial(n - r)
     for n in range(5):
         for r in range(n+1):

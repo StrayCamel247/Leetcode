@@ -22,11 +22,15 @@ def _search(name=''):
             for n in name:
                 if n in _:
                     # logging.info(os.path.join(questions_floder, _))
-                    logging.info(questions_floder+'/'+_)
+                    floder = questions_floder+'/'+_
+                    question_name = _.split('.')[-2]
+                    print('- [{name}]({url})'.format(name=question_name,url=floder))
                     res +=1
         if isinstance(name, str) and name in _:
-            # logging.info(os.path.join(questions_floder, _))
-            logging.info(questions_floder+'/'+_)
+            # print(os.path.join(questions_floder, _))
+            floder = questions_floder+'/'+_
+            question_name = _.split('.')[-2]
+            print('- [{name}]({url})'.format(name=question_name,url=floder))
             res +=1
     return res
 

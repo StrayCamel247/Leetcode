@@ -5,3 +5,4 @@ leetcode解题的源码，解题思路在代码的注释里。
 ## python@leetcode官方专题
 > 记录刷官方专题的题目
 - [递归专题](/python@leetcode官方递归专题.md)
+- [数组专题](python@leetcode官方数组专题.md)
