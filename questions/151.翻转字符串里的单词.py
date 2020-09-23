@@ -56,9 +56,8 @@
 #
 
 # @lc code=start
-import re
 class Solution:
     def reverseWords(self, s: str) -> str:
-        return ' '.join(re.findall(r'[\S]+',s)[::-1])
+        return ' '.join(reversed(s.split()))
 # @lc code=end
 

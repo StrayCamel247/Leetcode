@@ -14,13 +14,35 @@ _listdir.sort()
 # print(str(id_x.fixed[0])+'.反转字符串.py')
 
 
-def _search(name):
+def _search(name=''):
+    name = name.split(' ')
+    res = 0
     for _ in _listdir:
-        if name in _:
-            logging.info(os.path.join(questions_floder, _))
-            break
-    return _
+        if isinstance(name, list):
+            for n in name:
+                if n in _:
+                    # logging.info(os.path.join(questions_floder, _))
+                    logging.info(questions_floder+'/'+_)
+                    res +=1
+        if isinstance(name, str) and name in _:
+            # logging.info(os.path.join(questions_floder, _))
+            logging.info(questions_floder+'/'+_)
+            res +=1
+    return res
 
 
 if __name__ == "__main__":
-    _search('反转字符串')
+    names = sys.argv[1:]
+    for n in names:
+        logging.info('查找{name}问题...'.format(name=n))
+        res = _search(n)
+        if not res:logging.warn('没找到{name}问题'.format(name=n))
+        print()
+    # def test(k):
+    #     tmp = k
+    #     res = [0 for _ in range(5)]
+    #     res2 = [str(_)+tmp for _ in res]
+
+
+    # # print(res, res2)
+    # test(01)

@@ -8,13 +8,13 @@
 class Solution:
     def myPow(self, x: float, n: int) -> float:
         # 二分法 log(n)
-        def quickMul(N):
+        def _help(N):
             if N == 0:
                 return 1.0
-            y = quickMul(N // 2)
+            y = _help(N // 2)
             return y * y if N % 2 == 0 else y * y * x
         
-        return quickMul(n) if n >= 0 else 1.0 / quickMul(-n)
+        return _help(n) if n >= 0 else 1.0 / _help(-n)
 
 # @lc code=end
 

@@ -11,14 +11,29 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
 class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
-        if not root:return 0
-        # if root.left:
-        #     return 1+self.maxDepth(root.left)
-        # if root.right:
-        #     return 1+maxDepth(root.right)
-        return 1+max(self.maxDepth(root.left),self.maxDepth(root.right))
+    def __init__(self):
+        self.leftIds = []
+        self.widths = []
+    
+    def widthOfBinaryTree(self, root: TreeNode) -> int:
+        return self.dfs(root, 0, 0)
+    
+    def dfs(self, node, depth, id):
+        # node: current node of the current layer
+        # depth: depth of a tree, starting from 0
+        # id: current id of the node
+        # returns the max width of all layers
+        if node == None:
+            return 0
+        if len(self.leftIds) == depth:
+            self.leftIds.append(id)
+            self.widths.append(1)
+        else:
+            self.widths[depth] = id - self.leftIds[depth] + 1
+            
+        leftMaxWidth = self.dfs(node.left, depth + 1, id * 2)
+        rightMaxWidth = self.dfs(node.right, depth + 1, id * 2 + 1)
+            
+        return max(max(leftMaxWidth, rightMaxWidth), self.widths[depth])
 # @lc code=end
-

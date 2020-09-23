@@ -70,7 +70,6 @@ class Solution:
         '''
         
         if s==s[::-1]:
-            print(s)
             return s
         res = s[:1]
         for i in range(len(s)):
