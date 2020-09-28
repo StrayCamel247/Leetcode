@@ -51,15 +51,19 @@ class Solution:
         # for i in range(k):
         #     nums.insert(0, nums[-1])
         #     nums.pop()
-        n=len(nums)
-        k=k%n
-        def swap(l,r):
-            while(l<r):
-                nums[l],nums[r]=nums[r],nums[l]
-                l+=1
-                r-=1
-        swap(0,n-k-1)
-        swap(n-k,n-1)
-        swap(0,n-1)
+        # n=len(nums)
+        # k=k%n
+        # def swap(l,r):
+        #     while(l<r):
+        #         nums[l],nums[r]=nums[r],nums[l]
+        #         l+=1
+        #         r-=1
+        # swap(0,n-k-1)
+        # swap(n-k,n-1)
+        # swap(0,n-1)
+        realk=(k % len(nums))
+        if realk==0:
+            return
+        nums[:]=nums[-realk:]+nums[0:-realk]
 # @lc code=end
 
