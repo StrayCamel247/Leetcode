@@ -30,12 +30,6 @@ class Solution:
                     L = bisect.bisect_right(nums,nums[L], L, R)
                     R = bisect.bisect_left(nums,nums[R], L, R)-1
                     
-                    # while L < R and nums[L] == nums[L+1] :
-                    #     L = L+1
-                    # while L < R and nums[R] == nums[R-1] :
-                    #     R = R-1
-                    # L = L+1
-                    # R = R-1
                 else:
                     L,R = L+(_sum < 0),R-(_sum > 0)
         return self.res
