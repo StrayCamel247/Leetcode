@@ -41,7 +41,7 @@
 
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        re = ListNode(0)
+        re = ListNode('head')
         r=re
         carry=0
         while(l1 or l2):
@@ -60,3 +60,5 @@ class Solution:
 if __name__ == "__main__":
     test = Solution()
     print(test.addTwoNumbers(ListNode([2,4,3]),ListNode([5,6,4])))
+    test= []
+    test.insert
