@@ -32,7 +32,19 @@
             - 查询缓存若无则拉数据库同时缓存，key值为某个时间范围和筛选条件
     - inner join; left join/right join; join; full join 区别和性能?
     - sql执行的顺序?
-    - pgsql各个索引?
+        ```
+        (8) SELECT (9)DISTINCT<Select_list>
+        (1) FROM <left_table> (3) <join_type>JOIN<right_table>
+        (2) ON<join_condition>
+        (4) WHERE<where_condition>
+        (5) GROUP BY<group_by_list>
+        (6) WITH {CUBE|ROLLUP}
+        (7) HAVING<having_condtion>
+        (10) ORDER BY<order_by_list>
+        (11) LIMIT<limit_number>
+        ```
+    - pgsql各个索引
+        - https://developer.aliyun.com/article/111793
     - 公司有人在探索es系统，因为年底项目开发进度比较紧张还没开始
         - 个人认为/已有研究表明PG的性能是足以支撑现在的数据量的
 
@@ -51,7 +63,7 @@
     - 通过包分成不同的模块对应不同的功能
 
 - 关于python
-> python对接的时高效率开发，性能方便缺失有不行，弱数据类型语言
+    > python对接的时高效率开发，性能方便缺失有不行，弱数据类型语言
     - python-golang的区别?
 
     - 基础python高效率的使用
@@ -110,14 +122,8 @@
 # OS系统
 ## 进程和线程的区别
 ## 各个排序算法
-        冒泡排序	最差、平均O（n^2）,最好O(N)	1
-        鸡尾酒排序(双向冒泡排序)	最差、平均O（n^2）,最好O(N)	1
-        插入排序	最差、平均O（n^2）,最好O(N)	1
-        归并排序	最差、平均、最好O（nlogn）	n
-        桶排序	n	k
-        基数排序	dn	n
-        二叉树排序	nlogn	n
-        图书馆排序	nlogn	(1+e)n
+
+![](https://cdn.learnku.com/uploads/images/202001/04/22893/oVXLJOpmg3.png!large)
     - 冒泡排序
         - 比较相邻的元素。如果第一个比第二个大，就交换它们两个；针对所有的元素重复以上的步骤，除了最后一个；
         - 每一遍比较 最后一个总是最大的
@@ -142,4 +148,3 @@
         - 基数排序是按照低位先排序，然后收集；再按照高位排序，然后再收集；依次类推，直到最高位。有时候有些属性是有优先级顺序的，先按低优先级排序，再按高优先级排序。最后的次序就是高优先级高的在前，高优先级相同的低优先级高的在前。
     - 不得不说python sorted 的Timsort算法
         - 利用了归并排序与插入排序
-    - 
