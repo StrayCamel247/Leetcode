@@ -45,11 +45,12 @@ class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         if len(prices)==0:return 0
         dp = 0
-        min_price = prices[0]
-        for i in range(1, len(prices)):
-            min_price = min(min_price, prices[i])
-            dp=max(dp, prices[i]-min_price)
-        return dp
+        dp1 = -prices[0]
+        dp2 = float('-inf')
+        for _ in prices[1:]:
+            dp1=max(dp1, dp-_)
+            dp2=max(dp2, dp1+_)
+        return max(dp2,dp)
 
 # @lc code=end
 if __name__ == "__main__":

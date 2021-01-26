@@ -58,16 +58,31 @@
 # @lc code=start
 from typing import List
 class Solution:
+    def handler(self,prices):
+        if not prices:
+            return 0
+        def _handler(test):
+            while len(test)>=2:
+                yield test[1]-test[0]
+                test = test[1:]
+            if not test:
+                yield 0
+            yield -test[0]
+        # 贪心算法
+        return sum([_ for _ in _handler(prices)  if _>0])
+        
     def maxProfit(self, prices: List[int]) -> int:
         if not prices:
             return 0
         res = 0
         # 贪心算法
-        for i in range(0, len(prices)-1):
-            res += max(prices[i + 1] - prices[i], 0)
+        cost = prices[0]
+        for _ in prices[1:]:
+            res += max(0,_-cost)
+            cost = _
         return res
         
 # @lc code=end
 if __name__ == "__main__":
     test = Solution()
-    print(test.maxProfit(prices=[7,1,5,3,6,4]))
+    print(test.maxProfit(prices=[1]))
