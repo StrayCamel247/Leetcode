@@ -53,9 +53,21 @@
 # 
 # 
 #
-
+from typing import List
 # @lc code=start
 class Solution:
     def rob(self, nums: List[int]) -> int:
+        def _handler(_nums):
+            if len(_nums)<3 :return max(_nums)
+            grid= [0] * len(_nums)
+            grid[0] = _nums[0]
+            grid[1] = max(_nums[0], _nums[1])
+            for i in range(2, len(_nums)):
+                grid[i] = max(grid[i - 1], grid[i - 2] + _nums[i])
+            return max(grid)
+        if len(nums)<2:return max(nums)
+        return max(_handler(nums[1:]),_handler(nums[:-1]))
+
+
 # @lc code=end
 
