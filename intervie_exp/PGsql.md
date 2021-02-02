@@ -121,3 +121,111 @@ drop直接删掉表，truncate删除表中数据，再插入时自增长id又从
 ### 12.存储过程与触发器的区别
 ### 13.悲观锁和乐观锁是什么？
 ### 14.你常用的mysql引擎有哪些?各引擎间有什么区别?
+### 15.pg各个索引之间的区别和使用场景
+开放的索引接口，使得PG支持非常丰富的索引方法，例如btree , hash , gin , gist , sp-gist , brin , bloom , rum , zombodb , bitmap (greenplum extend)，用户可以根据不同的数据类型，以及查询的场景，选择不同的索引。
+
+PG内部还支持BitmapAnd, BitmapOr的优化方法，可以合并多个索引的扫描操作，从而提升多个索引数据访问的效率。
+
+btree , hash , gin , gist , sp-gist , brin , bloom , rum , zombodb , bitmap
+B-TREE索引通常支持的查询包括 > , < , = , <= , >= 以及排序。 目前大多数数据库都支持B-TREE索引方法。
+hash索引通常支持
+### 16.数据库sql的优化
+- 索引的建立
+- 减少group by字段，left join on 1=1多对一的情况使用min(xxx)
+- 表结构的设计；构建临时表
+- explain anylyse分析时间开销用在哪
+- 求唯一值
+  - `select distinct col from table ;  `
+  - 
+    ```
+    with recursive skip as (    
+      (    
+        select min(t.sex) as sex from sex t where t.sex is not null    
+      )    
+      union all    
+      (    
+        select (select min(t.sex) as sex from sex t where t.sex > s.sex and t.sex is not null)     
+          from skip s where s.sex is not null   
+      )    
+    )     
+    select * from skip where sex is not null;   
+    ```
+- 递归收敛优化
+  适用于，A表为主表，B表为记录表。 A表全扫，B表索引扫描了若干次（若干 = 唯一AID在B中出现的次数）。
+  (quote)[https://github.com/digoal/blog/blob/master/201612/20161201_01.md];
+  (quote)[https://github.com/digoal/blog/blob/master/201705/20170519_01.md?spm=a2c6h.12873639.0.0.45131bffXcMf5X&file=20170519_01.md]
+  - 建表
+    
+  create table a(id int primary key, info text);
+
+  create table b(id int primary key, aid int, crt_time timestamp);
+  create index b_aid on b(aid);
+  - 插入测试数据
+  -- a表插入1000条
+  insert into a select generate_series(1,1000), md5(random()::text);
+
+  -- b表插入500万条，只包含aid的500个id。
+  insert into b select generate_series(1,5000000), generate_series(1,500), clock_timestamp();
+  - 原始sql`select * from a where id not in (select aid from b); `
+  - 优化1`select a.id from a left join b on (a.id=b.aid) where b.* is null;`
+  - 递归收敛优化
+  ```
+  select * from a where id not in 
+    (
+  with recursive skip as (  
+    (  
+      select min(aid) aid from b where aid is not null  
+    )  
+    union all  
+    (  
+      select (select min(aid) aid from b where b.aid > s.aid and b.aid is not null)   
+        from skip s where s.aid is not null  
+    )  -- 这里的where s.aid is not null 一定要加,否则就死循环了.  
+  )   
+  select aid from skip where aid is not null
+  );
+  ```
+
+- sub_query优化
+  适用于 A表全扫，B表索引扫描了若干次（若干 = A表记录数）。
+  (quote)[https://yq.aliyun.com/roundtable/56354]
+  场景表述
+  一张小表A，里面存储了一些ID，大约几百个。
+  （比如说巡逻车辆ID，环卫车辆的ID，公交车，微公交的ID）。
+  另外有一张日志表B，每条记录中的ID是来自前面那张小表的，但不是每个ID都出现在这张日志表中，比如说一天可能只有几十个ID会出现在这个日志表的当天的数据中。 
+  （比如车辆的行车轨迹数据，每秒上报轨迹，数据量就非常庞大）。 
+  那么我怎么快速的找出今天没有出现的ID呢。
+  （哪些巡逻车辆没有出现在这个片区，是不是偷懒了？哪些环卫车辆没有出行，哪些公交或微公交没有出行）？
+  ```
+postgres=# explain (analyze,timing) select * from a where id not in (select aid from b); 
+                                                       QUERY PLAN                                                       
+------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on a  (cost=179053.25..179074.76 rows=500 width=37) (actual time=4369.478..4369.525 rows=100 loops=1)
+   Filter: (NOT (hashed SubPlan 1))
+   Rows Removed by Filter: 901
+   SubPlan 1
+     ->  Seq Scan on b  (cost=0.00..154053.60 rows=9999860 width=4) (actual time=0.322..1829.342 rows=10000000 loops=1)
+ Planning time: 0.094 ms
+ Execution time: 4423.364 ms
+(7 rows)
+
+postgres=# explain (analyze,timing) select a.* from a left join b on (a.id=b.aid) where b.* is null;
+                                                      QUERY PLAN                                                       
+-----------------------------------------------------------------------------------------------------------------------
+ Hash Right Join  (cost=31.52..280244.69 rows=49999 width=37) (actual time=4316.767..4316.790 rows=100 loops=1)
+   Hash Cond: (b.aid = a.id)
+   Filter: (b.* IS NULL)
+   Rows Removed by Filter: 10000000
+   ->  Seq Scan on b  (cost=0.00..154053.60 rows=9999860 width=44) (actual time=0.013..2544.321 rows=10000000 loops=1)
+   ->  Hash  (cost=19.01..19.01 rows=1001 width=37) (actual time=0.342..0.342 rows=1001 loops=1)
+         Buckets: 1024  Batches: 1  Memory Usage: 76kB
+         ->  Seq Scan on a  (cost=0.00..19.01 rows=1001 width=37) (actual time=0.009..0.137 rows=1001 loops=1)
+ Planning time: 0.173 ms
+ Execution time: 4316.828 ms
+(10 rows)
+  ```
+  - sql优化
+  ```
+  select * from a 
+  where (select aid from b where b.aid=a.id limit 1) is null;  -- sub query is NULL, 是不是很给力呢
+  ```
