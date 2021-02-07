@@ -36,6 +36,9 @@ from functools import reduce
 # @lc code=start
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        return reduce(lambda x,y:x^y, nums)
+        # return reduce(lambda x,y:x^y, nums)
+        sum1 = sum(nums)
+        sum2 = 2*sum(set(nums))
+        return sum2 - sum1
 # @lc code=end
 
