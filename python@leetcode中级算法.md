@@ -1,9 +1,9 @@
 > 记录刷官方专题的记录
 
 ## 数组专题
-[官方专题](https://leetcode-cn.com/leetbook/read/array-and-string/xkhi75/)
+[中级算法](https://leetcode-cn.com/leetbook/detail/top-interview-questions-medium/)
 > 专题描述
-数组 是数据结构中的基本模块之一。因为 字符串 是由字符数组形成的，所以二者是相似的。大多数面试问题都属于这个范畴。
+LeetCode 官方推出的经典面试题目清单 —— 「中级算法 - 巩固训练」
 
 在本 LeetBook 中，我们将介绍 数组 和 字符串。完成后，你将：
 

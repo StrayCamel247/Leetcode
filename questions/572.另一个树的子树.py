@@ -70,6 +70,9 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    """
+    KMP算法是一种改进的字符串匹配算法，由D.E.Knuth，J.H.Morris和V.R.Pratt提出的，因此人们称它为克努特—莫里斯—普拉特操作（简称KMP算法）。KMP算法的核心是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是通过一个next()函数实现，函数本身包含了模式串的局部匹配信息。KMP算法的时间复杂度O(m+n)
+    """
     def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
         # reversion递归解法
         if not s and not t:
