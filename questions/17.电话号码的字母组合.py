@@ -3,7 +3,7 @@
 #
 # [17] 电话号码的字母组合
 #
-
+from typing import List
 # @lc code=start
 import itertools
 class Solution:

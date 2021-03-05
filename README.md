@@ -3,11 +3,10 @@ leetcode解题的源码，解题思路在代码的注释里。
 👨‍💻 每个人都有一个自己的面试题库吧~
 - 我的[leetcode主页](https://leetcode-cn.com/u/stray_camel/)
 
-# 2021/01/25 
-> 春招面试准备
+
 ## 基础知识点
 
-## leetcode练习
+## [CONTENT]
 ### 动态规划
 [121.买卖股票的最佳时机](/questions/121.买卖股票的最佳时机.py)
 [122.买卖股票的最佳时机-ii](/questions/122.买卖股票的最佳时机-ii.py)
