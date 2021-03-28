@@ -54,20 +54,22 @@ func levelOrder(root *TreeNode) [][]int {
 		return [][]int{}
 	}
 	var res [][]int
-	queue := []*TreeNode{root}
-	for level := 0; len(queue) > 0; level++ { //level - to track where we need to insert values
-		res = append(res, []int{}) //adding slice for the new "level" of values
-		for levelSize := len(queue); levelSize > 0; levelSize-- {
-			//levelSize - to track how many elements we need to dequeue and insert in the current "level"
-			if queue[0].Left != nil {
-				queue = append(queue, queue[0].Left)
-			} //adding next nodes to the queue
-			if queue[0].Right != nil {
-				queue = append(queue, queue[0].Right)
+	// 将根节点放在二维列表中
+	q := []*TreeNode{root}
+	// 遍历左右节点，左右兄弟节点放在同一层
+	for len(q) > 0 {
+		level := []int{}
+		for _, x := range q {
+			q = q[1:]
+			if x.Left != nil {
+				q = append(q, x.Left)
 			}
-			res[level] = append(res[level], queue[0].Val) //adding first element in the queue to a "level" slice
-			queue = queue[1:]                             //deque first element
+			if x.Right != nil {
+				q = append(q, x.Right)
+			}
+			level = append(level, x.Val)
 		}
+		res = append(res, level)
 	}
 	return res
 }

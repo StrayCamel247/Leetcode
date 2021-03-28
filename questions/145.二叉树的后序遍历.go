@@ -40,6 +40,10 @@
  * }
  */
 func postorderTraversal(root *TreeNode) (ans []int) {
+	/*
+		后序遍历
+		左右中
+	*/
 	var handler func(*TreeNode)
 	handler = func(root *TreeNode) {
 		if root == nil {
