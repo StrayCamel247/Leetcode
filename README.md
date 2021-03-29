@@ -1,7 +1,7 @@
 # leetcode
 leetcode解题的源码，解题思路在代码的注释里。
 👨‍💻 每个人都有一个自己的面试题库吧~
-- 我的[leetcode主页](https://leetcode-cn.com/u/stray_camel/)
+- StrayCamel247-[leetcode：娃哈哈店长](https://leetcode-cn.com/u/stray_camel/)
 
 
 ## 基础知识点
