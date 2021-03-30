@@ -5,9 +5,6 @@ import (
 )
 
 func main() {
-	var a int
-	a = 1
-	fmt.Println(a)
-	a += 1
-	fmt.Println(a)
+	a := 11 >> 1
+	fmt.Print(a)
 }
