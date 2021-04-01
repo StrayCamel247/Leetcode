@@ -53,9 +53,7 @@
 class Solution(object):
     def searchMatrix(self, matrix, target):
         """
-        :type matrix: List[List[int]]
-        :type target: int
-        :rtype: bool
+        二分查找
         """
         target_row = bisect.bisect_right([row[0] for row in matrix], target) - 1
         if target_row < 0:

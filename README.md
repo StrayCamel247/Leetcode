@@ -51,7 +51,7 @@
 #### Others
 |go-解题|python-解题|java-解题|tag|
 |:---:|:---:|:---:|:---:|
-|[questions\74.搜索二维矩阵.go](questions\74.搜索二维矩阵.go)|[questions\74.搜索二维矩阵.py](questions\74.搜索二维矩阵.py)||array; binary-search|
+|[questions\74.搜索二维矩阵.go](questions\74.搜索二维矩阵.go)|[questions\74.搜索二维矩阵.py](questions\74.搜索二维矩阵.py)||二分查找|
 ### 动态规划
 |go-解题|python-解题|java-解题|tag|
 |:---:|:---:|:---:|:---:|
@@ -64,6 +64,11 @@
 |[不同路径](questions\62.不同路径.go)||
 |[不同路径-ii](questions\63.不同路径-ii.go)||
 
+#### Others
+|go-解题|python-解题|java-解题|tag|
+|:---:|:---:|:---:|:---:|
+|[questions\741.摘樱桃.go](questions\741.摘樱桃.go)|
+|[questions\64.最小路径和.go](questions\64.最小路径和.go)|
 ### 双指针
 [15.三数之和](/questions/15.三数之和.py)
 [16.最接近的三数之和.py](/questions/16.最接近的三数之和.py.py)

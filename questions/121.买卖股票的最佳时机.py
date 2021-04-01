@@ -41,9 +41,13 @@
 # @lc code=start
 from typing import List
 class Solution:
-    # 一次遍历
+    """
+    动态规划
+
+    """
     def maxProfit(self, prices: List[int]) -> int:
         if len(prices)==0:return 0
+        # 只买卖一次
         dp = 0
         dp1 = -prices[0]
         dp2 = float('-inf')
