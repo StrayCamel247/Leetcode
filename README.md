@@ -1,4 +1,4 @@
-# leetcode
+# leetcode-项目已停止归档-后续更新地址：https://github.com/OHSY247/Leetcode
 > 刷题防止老年痴呆（。＾▽＾）
 👨‍💻 每个人都有一个自己的面试题库吧~
 - StrayCamel247-[leetcode：娃哈哈店长](https://leetcode-cn.com/u/stray_camel/)
