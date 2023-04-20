@@ -2,16 +2,13 @@
 > 👨‍💻 每个人都有一个自己的面试题库吧~
 >
 
-## 脚本文件使用
+## 脚本文件介绍
 
-### window
-
-updateCommit.bat
-
+### window:updateCommit.bat
 - 执行`./updateCommit.bat "commit msg"` 自动commit且push
 - 更新通过java解决的题目列表到文件`SolvedViaJava.md`
 
-## 使用手册
+## 文档介绍
 
 代码全部放在[questions](questions)文件夹中
 
