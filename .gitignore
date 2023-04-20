@@ -12,3 +12,5 @@ uploads/
 # 压缩文件
 **/.zip
 *.exe
+
+java/src/leetcode/editor/cn/doc/**/*
